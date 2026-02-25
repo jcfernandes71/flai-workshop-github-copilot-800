@@ -22,14 +22,16 @@ function Leaderboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiBase = process.env.REACT_APP_CODESPACE_NAME
-    ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev`
-    : 'http://localhost:8000';
-
   useEffect(() => {
-    const leaderboardUrl = `${apiBase}/api/leaderboard/`;
-    const teamsUrl       = `${apiBase}/api/teams/`;
-    const activitiesUrl  = `${apiBase}/api/activities/`;
+    const leaderboardUrl = process.env.REACT_APP_CODESPACE_NAME
+      ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+      : 'http://localhost:8000/api/leaderboard/';
+    const teamsUrl = process.env.REACT_APP_CODESPACE_NAME
+      ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+      : 'http://localhost:8000/api/teams/';
+    const activitiesUrl = process.env.REACT_APP_CODESPACE_NAME
+      ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+      : 'http://localhost:8000/api/activities/';
 
     console.log('Leaderboard: fetching from', leaderboardUrl);
     console.log('Teams: fetching from', teamsUrl);
@@ -79,7 +81,7 @@ function Leaderboard() {
         setError(err.message);
         setLoading(false);
       });
-  }, [apiBase]);
+  }, []);
 
   const rankClass = (idx) => {
     if (idx === 0) return 'gold';

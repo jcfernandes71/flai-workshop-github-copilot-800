@@ -40,8 +40,12 @@ function Users() {
     ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev`
     : 'http://localhost:8000';
 
-  const usersUrl = `${apiBase}/api/users/`;
-  const teamsUrl = `${apiBase}/api/teams/`;
+  const usersUrl = process.env.REACT_APP_CODESPACE_NAME
+    ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+    : 'http://localhost:8000/api/users/';
+  const teamsUrl = process.env.REACT_APP_CODESPACE_NAME
+    ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+    : 'http://localhost:8000/api/teams/';
 
   const loadData = useCallback(() => {
     setLoading(true);
